@@ -1,0 +1,491 @@
+/* =============================================
+   DINEO LANDING PAGE — ROMANTIC & COZY STYLES
+   ============================================= */
+
+/* --- RESET & BASE --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Palette */
+  --rose-deep:    #8B2635;
+  --rose-mid:     #C4566A;
+  --rose-blush:   #F2B8C2;
+  --rose-faint:   #FDF0F2;
+  --cream:        #FBF6EF;
+  --warm-white:   #FEFCFA;
+  --ink:          #2C1B18;
+  --ink-soft:     #5C3D38;
+  --gold:         #C9965C;
+  --gold-faint:   #F7EDE0;
+
+  /* Typography */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'Lato', system-ui, sans-serif;
+
+  /* Spacing */
+  --section-pad: clamp(4rem, 10vw, 8rem);
+  --inner-max:   680px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.85;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+
+/* --- FLOATING PETALS --- */
+.petals-container {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.petal {
+  position: absolute;
+  top: -60px;
+  font-size: 1.2rem;
+  opacity: 0;
+  animation: petalFall linear infinite;
+  user-select: none;
+}
+
+@keyframes petalFall {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.4; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+
+/* --- HERO SECTION --- */
+.hero {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: clamp(3rem, 8vw, 6rem);
+  overflow: hidden;
+}
+
+/* Slideshow */
+.slideshow-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.slideshow {
+  position: absolute;
+  inset: 0;
+  background-color: var(--ink);
+}
+
+.slideshow img.slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1.2s ease-in-out;
+  will-change: opacity;
+}
+
+.slideshow img.slide.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Gradient overlay on top of photos */
+.slideshow-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(44, 27, 24, 0.16) 0%,
+    rgba(44, 27, 24, 0.12) 40%,
+    rgba(44, 27, 24, 0.55) 100%
+  );
+  z-index: 2;
+}
+
+/* Placeholder when no images */
+.slide-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: linear-gradient(135deg, #3d1c24 0%, #6b2d3e 50%, #3d1c24 100%);
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  padding: 2rem;
+}
+
+.placeholder-heart {
+  font-size: 5rem;
+  color: var(--rose-blush);
+  opacity: 0.4;
+  margin-bottom: 1rem;
+}
+
+.placeholder-text {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.placeholder-text code {
+  background: rgba(255,255,255,0.1);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  font-family: monospace;
+}
+
+/* Slide dots */
+.slide-dots {
+  position: absolute;
+  bottom: clamp(5rem, 12vw, 8rem);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 3;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  transition: background 0.3s, transform 0.3s;
+  cursor: pointer;
+}
+
+.dot.active {
+  background: white;
+  transform: scale(1.3);
+}
+
+/* Hero text */
+.hero-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  color: white;
+  padding: 0 1.5rem;
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rose-blush);
+  margin-bottom: 0.75rem;
+  opacity: 0.9;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 12vw, 7rem);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--rose-blush);
+}
+
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(0.85rem, 3vw, 1rem);
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 2.5rem;
+}
+
+.scroll-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.7); }
+  50%       { opacity: 1; transform: scaleY(1); }
+}
+
+
+/* --- CONTENT SECTIONS --- */
+.content-section {
+  position: relative;
+  z-index: 2;
+  padding: var(--section-pad) 1.5rem;
+  background-color: var(--cream);
+}
+
+.content-section.alt-bg {
+  background-color: var(--rose-faint);
+}
+
+.conclusion-section {
+  background: linear-gradient(160deg, var(--cream) 0%, var(--gold-faint) 100%);
+}
+
+.section-inner {
+  max-width: var(--inner-max);
+  margin: 0 auto;
+}
+
+.section-label {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rose-mid);
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 5vw, 2.8rem);
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--ink);
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--rose-blush);
+}
+
+.message-body p {
+  font-size: clamp(1.2rem, 2.8vw, 1.4rem);
+  color: var(--ink-soft);
+  margin-bottom: 1.6rem;
+  max-width: 60ch;
+}
+
+.message-body p:last-child {
+  margin-bottom: 0;
+}
+
+.sign-off {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 4vw, 1.7rem);
+  font-style: italic;
+  color: var(--rose-deep);
+  margin-top: 2.5rem !important;
+}
+
+
+/* --- WHATSAPP CTA --- */
+.cta-block {
+  margin-top: 3.5rem;
+  padding: 2.5rem 2rem;
+  background: white;
+  border-radius: 16px;
+  border: 1px solid var(--rose-blush);
+  text-align: center;
+  box-shadow: 0 4px 30px rgba(196, 86, 106, 0.1);
+}
+
+.cta-label {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-style: italic;
+  color: var(--ink-soft);
+  margin-bottom: 1.25rem;
+}
+
+.whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background-color: #25D366;
+  color: white;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 400;
+  padding: 0.85rem 1.8rem;
+  border-radius: 50px;
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(37, 211, 102, 0.4);
+  background-color: #20ba58;
+}
+
+.whatsapp-btn:active {
+  transform: translateY(0);
+}
+
+/* --- RESPONSE OPTIONS --- */
+.response-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.response-btn {
+  background-color: var(--rose-mid);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.9rem 1.6rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+  box-shadow: 0 4px 15px rgba(196, 86, 106, 0.2);
+}
+
+.response-btn:hover {
+  background-color: var(--rose-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(139, 38, 53, 0.3);
+}
+
+.response-btn:active {
+  transform: translateY(0);
+}
+
+.cta-divider {
+  color: var(--ink-soft);
+  margin: 1.25rem 0;
+  font-style: italic;
+  opacity: 0.7;
+}
+
+.cta-note {
+  font-size: 0.78rem;
+  color: var(--rose-mid);
+  margin-top: 1rem;
+  font-style: italic;
+  min-height: 1.2em;
+}
+
+
+/* --- FOOTER --- */
+.site-footer {
+  background-color: var(--ink);
+  color: rgba(255,255,255,0.4);
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.8rem;
+  font-family: var(--font-body);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  position: relative;
+  z-index: 2;
+}
+
+
+/* --- SCROLL REVEAL ANIMATIONS --- */
+.section-inner {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  will-change: opacity, transform;
+}
+
+.section-inner.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* --- MOBILE OPTIMIZATIONS --- */
+@media (max-width: 600px) {
+  :root {
+    --section-pad: 3.5rem;
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 16vw, 4.5rem);
+  }
+
+  .hero-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .section-title {
+    font-size: 1.7rem;
+  }
+
+  .message-body p {
+    font-size: 1rem;
+    max-width: 100%;
+  }
+
+  .cta-block {
+    padding: 2rem 1.25rem;
+  }
+
+  .whatsapp-btn {
+    font-size: 0.9rem;
+    padding: 0.8rem 1.4rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-title {
+    font-size: 2.8rem;
+  }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .petal, .scroll-line {
+    animation: none;
+  }
+  .section-inner {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

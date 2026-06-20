@@ -1,0 +1,9 @@
+# 📸 Images Folder
+
+Drop Dineo's photos in here.
+
+Supported formats: .jpg  .jpeg  .png  .webp
+
+Then open images.js and add the filenames to the SLIDESHOW_IMAGES array.
+
+See README.md in the root folder for full instructions.
